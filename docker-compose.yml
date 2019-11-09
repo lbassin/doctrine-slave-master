@@ -8,13 +8,20 @@ services:
             - MYSQL_USER=${DB_USER}
             - MYSQL_PASSWORD=${DB_PASSWORD}
             - MYSQL_RANDOM_ROOT_PASSWORD=yes
+
     php:
         build: docker/php
         working_dir: '/app'
         volumes:
             - './:/app'
+
     composer:
         image: 'composer:1.8'
         command: install
         volumes:
             - './:/app'
+
+    adminer:
+        image: 'adminer:4.7'
+        ports:
+          - 127.0.0.1:8080:8080
